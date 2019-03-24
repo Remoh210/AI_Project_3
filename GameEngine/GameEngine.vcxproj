@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BMPImage.cpp" />
+    <ClCompile Include="BMPMapMaking.cpp" />
     <ClCompile Include="cAABB.cpp" />
     <ClCompile Include="cAnimationCurveCommand.cpp" />
     <ClCompile Include="cAnimationState.cpp" />
@@ -168,6 +170,7 @@
     <ClCompile Include="cLightManager.cpp" />
     <ClCompile Include="cLuaBrain.cpp" />
     <ClCompile Include="cGameObject.cpp" />
+    <ClCompile Include="cMapNode.cpp" />
     <ClCompile Include="cMazeMain.cpp" />
     <ClCompile Include="cMazeMaker.cpp" />
     <ClCompile Include="cMesh.cpp" />
@@ -206,6 +209,7 @@
     <ClCompile Include="Ply\CPlyFile5nt_planarUV.cpp" />
     <ClCompile Include="Ply\CStringHelper.cpp" />
     <ClCompile Include="Ply\CVector3f.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="sModelDrawInfo.cpp" />
     <ClCompile Include="SmoothStep.cpp" />
     <ClCompile Include="sNVPair.cpp" />
@@ -216,6 +220,7 @@
     <ClCompile Include="UserIO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BMPImage.h" />
     <ClInclude Include="cAABB.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraChangeanimr.h" />
@@ -229,6 +234,7 @@
     <ClInclude Include="cLightHelper.h" />
     <ClInclude Include="cLightManager.h" />
     <ClInclude Include="cLuaBrain.h" />
+    <ClInclude Include="cMapNode.h" />
     <ClInclude Include="cMazeMaker.h" />
     <ClInclude Include="cMesh.h" />
     <ClInclude Include="cMoveToCommand.h" />
@@ -259,6 +265,7 @@
     <ClInclude Include="Ply\CPlyInfo.h" />
     <ClInclude Include="Ply\CStringHelper.h" />
     <ClInclude Include="Ply\CVector3f.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="sModelDrawInfo.h" />
     <ClInclude Include="SmoothStep.h" />
     <ClInclude Include="sNVPair.h" />

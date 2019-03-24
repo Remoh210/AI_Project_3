@@ -108,6 +108,9 @@
     <Filter Include="cMazeMaker">
       <UniqueIdentifier>{e6f98bac-0bd0-49e4-a662-b846e59c7728}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bmpLoader">
+      <UniqueIdentifier>{cc1f31aa-6285-43f1-86e9-7a30f9d9116b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cShaderManager.cpp">
@@ -284,6 +287,16 @@
     <ClCompile Include="PlyFileLoader.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="BMPMapMaking.cpp">
+      <Filter>bmpLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="BMPImage.cpp">
+      <Filter>bmpLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>bmpLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cShaderManager.h">
@@ -441,6 +454,15 @@
     </ClInclude>
     <ClInclude Include="linmath.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BMPImage.h">
+      <Filter>bmpLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>bmpLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cMapNode.h">
+      <Filter>bmpLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

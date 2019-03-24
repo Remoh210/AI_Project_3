@@ -72,7 +72,8 @@ std::vector< cGameObject* > vec_pSpheres;
 
 // To the right, up 4.0 units, along the x axis
 
-
+void GetBMPPixelValues(std::string bmpFileName);
+void CreateMap();
 unsigned int numberOfObjectsToDraw = 0;
 
 unsigned int SCR_WIDTH = 1000;
@@ -132,13 +133,6 @@ GLint g_FBO_SizeInPixes = 512;		// = 512 the WIDTH of the framebuffer, in pixels
 int main(void)
 {
 
-
-	//********Generate Maze********
-	cMazeMaker Maze;
-	Maze.GenerateMaze(50, 50);
-	Maze.PrintMaze();
-	//********Generate Maze********
-
 	loadConfig();
 
 	GLFWwindow* window;
@@ -168,6 +162,7 @@ int main(void)
 	glfwMakeContextCurrent(window);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSwapInterval(1);
+
 
 
 	// Create the shader manager...
@@ -315,15 +310,7 @@ int main(void)
 	//vec_sorted_drawObj = vec_pObjectsToDraw;
 
 
-	for (unsigned int objIndex = 0;
-		objIndex != (unsigned int)vec_pObjectsToDraw.size();
-		objIndex++)
-	{
-		cGameObject* pCurrentMesh = vec_pObjectsToDraw[objIndex];
-		if (pCurrentMesh->materialDiffuse.a < 1.0f) { vec_transObj.push_back(pCurrentMesh); }
-		else { vec_non_transObj.push_back(pCurrentMesh); }
 
-	}//for ( unsigned int objIndex = 0; 
 
 
 	// Get the current time to start with
@@ -372,6 +359,26 @@ int main(void)
 	glm::vec3 initPos = glm::vec3(pCharacter->position.x - 400.0f, pCharacter->position.y + 250.0f, pCharacter->position.z);
 	Camera cam(pCharacter, idealpos, 5.0f, 20.0f, 100.0f, 0.0f, initPos);
 	camera = cam;
+
+
+
+	GetBMPPixelValues("assets/bitmap/ResourceMap.bmp");
+	CreateMap();
+
+
+
+
+
+	for (unsigned int objIndex = 0;
+		objIndex != (unsigned int)vec_pObjectsToDraw.size();
+		objIndex++)
+	{
+		cGameObject* pCurrentMesh = vec_pObjectsToDraw[objIndex];
+		if (pCurrentMesh->materialDiffuse.a < 1.0f) { vec_transObj.push_back(pCurrentMesh); }
+		else { vec_non_transObj.push_back(pCurrentMesh); }
+
+	}//for ( unsigned int objIndex = 0; 
+
 	// Draw the "scene" (run the program)
 	while (!glfwWindowShouldClose(window))
 	{
@@ -444,33 +451,7 @@ int main(void)
 
 
 
-		//Draw Maze
-
-		block->position = glm::vec3(0.0f);
-		for (unsigned int a = 0; a < Maze.maze.size(); a++)
-		{
-			for (unsigned int b = 0; b < Maze.maze[a].size(); b++)
-			{
-				if (Maze.maze[a][b][0])
-				{
-					glm::mat4 matblock(1.0f);
-					if (glm::distance(block->position, pCharacter->position) < 300.0f)
-					{
-						DrawObject(block, matblock, program, NULL);
-					}
-					block->position.x += 20.0f;
-
-				}
-				else
-				{
-					//std::cout << "  ";
-					block->position.x += 20.0f;
-				}
-
-			}
-			block->position.x = 0.0f;
-			block->position.z += 20.0f;
-		}
+		
 				//std::sort(vec_sorted_drawObj.begin(), vec_sorted_drawObj.end(), transp);
 		std::sort(vec_transObj.begin(), vec_transObj.end(), distToCam);
 
