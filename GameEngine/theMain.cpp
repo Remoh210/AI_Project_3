@@ -82,7 +82,7 @@ std::string title = "Default";
 std::string scene = "Scene1.json";
 
 Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
-
+void moveDalek(cGameObject* dalek);
 //Camera camera;
 
 bool distToCam(cGameObject* leftObj, cGameObject* rightObj) {
@@ -578,7 +578,7 @@ int main(void)
 
 
 
-
+		moveDalek(dalek);
 
 
 		//sceneCommandGroup.Update(deltaTime);

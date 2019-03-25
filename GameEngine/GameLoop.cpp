@@ -3,6 +3,7 @@
 #include "globalStuff.h"
 #include <vector>
 #include <utility>
+#include <string>
 
 #include "BMPImage.h"
 #include "ResourceManager.h"
@@ -24,13 +25,16 @@ public:
 	bool Res = false;
 	bool Gatherer = false;
 	bool visited = false;
+	bool home = false; 
 	float Dist = std::numeric_limits<float>::max();
 
 	int Prev;
 	bool Removed = false;
 };
 
-
+int target = 0;
+int source = 0;
+int home = 0;
 ResourceManager gResourceManager;
 
 std::vector<std::vector<char>> bmpPixelValues;
@@ -40,13 +44,15 @@ std::vector<std::vector<cGameObject*>> nodeMeshObjs;
 std::vector<std::vector<sNode*>> mapNodes;
 
 std::vector<sNode*> vec_graph;
+std::vector<sNode*> vec_path;
+void getPath(std::vector<sNode*> &graph, std::vector<sNode*> &OutPath, int Source, int Target);
 
 std::map<std::string, cGameObject*> resourceMap;
 void PlaceObjects();
 void CreateNodeNeighbours();
-void dijkstra(std::vector<sNode*> &Graph, int Source);
+void dijkstra(std::vector<sNode*> &Graph, int Source, int Target);
 
-sNode* homeNode = NULL;
+
 
 
 
@@ -295,7 +301,7 @@ void PlaceObjects()
 				pSphere->bIsUpdatedByPhysics = true;
 				pSphere->bDontLight = true;
 				pSphere->bIsWireFrame = true;
-				pSphere->friendlyName = "res" + Count;
+				pSphere->friendlyName = "res" + std::to_string(Count);
 				pSphere->meshName = "Sphere_320.ply";		
 				float scale = 5.0f;
 				pSphere->setUniformScale(scale);
@@ -307,7 +313,7 @@ void PlaceObjects()
 			}
 			if(mapNodes[i][j]->nodeColour == 'b')
 			{
-				homeNode = mapNodes[i][j];
+				mapNodes[i][j]->home = true;
 			}
 		}
 	}
@@ -321,8 +327,7 @@ void PlaceObjects()
 		}
 	}
 
-	int target = 0;
-	int source = 0;
+
 	//finding target
 	for (int i = 0; i < vec_graph.size(); i++)
 	{
@@ -335,71 +340,143 @@ void PlaceObjects()
 		{
 			source = i;
 		}
+
+		if (vec_graph[i]->home)
+		{
+			home = i;
+		}
 	}
 
-	//void dijkstra(std::vector<sNode*> &Graph, int Source, int target);
+	dijkstra(vec_graph, source, target);
+
+	getPath(vec_graph, vec_path, source, target);
 }
 
 
-//bool isEmpty(const std::vector<sNode*>&Graph) {
-//	for (auto &Vert : Graph) {
-//		if (!Vert->Removed)
-//			return false;
-//	}
-//	return true;
-//}
-//
-//float length(const sNode* A, const sNode* B) {
-//
-//
-//	
-//	return glm::distance(A->thisNodeObj->position, B->thisNodeObj->position);
-//}
-//
-//
-//int getMinDistVert(std::vector<sNode*> &Graph) {
-//	float Dist = std::numeric_limits<float>::max();
-//	int Index = -1;
-//	for (int x = 0; x < Graph.size(); x++) {
-//		if (Graph[x]->Removed)
-//			continue;
-//
-//		if (Graph[x]->Dist < Dist) {
-//			Dist = Graph[x]->Dist;
-//			Index = x;
-//		}
-//	}
-//	return Index == -1 ? 0 : Index;
-//}
-//
-//void dijkstra(std::vector<sNode*> &Graph, int Source, int target) {
-//
-//	for (int x = 0; x < Graph.size(); x++) {
-//		Graph[x]->Dist = std::numeric_limits<float>::max();
-//		Graph[x]->Prev = -1;
-//		Graph[x]->Removed = false;
-//	}
-//
-//	Graph[Source]->Dist = .0f;
-//
-//		while (!isEmpty(Graph)) {
-//			int u = getMinDistVert(Graph);
-//			sNode* &Vert = Graph[u];
-//			Vert->Removed = true;
-//
-//			if (Vert->Prev != -1 || Vert == Graph[target])
-//			{
-//				break;
-//			}
-//
-//			for (int y = 0; y < Vert->vec_neighbours.size(); y++) {
-//				sNode* &Neighbour = Vert->vec_neighbours[y];
-//				float Alt = Vert->Dist + length(Vert, Neighbour);
-//				if (Alt < Neighbour->Dist) {
-//					Neighbour->Dist = Alt;
-//					Neighbour->Prev = u;
-//				}
-//			}
-//		}
-//}
+bool isEmpty(const std::vector<sNode*>&Graph) {
+	for (auto &Vert : Graph) {
+		if (!Vert->Removed)
+			return false;
+	}
+	return true;
+}
 
+float length(const sNode* A, const sNode* B) {
+
+
+	
+	return glm::distance(A->thisNodeObj->position, B->thisNodeObj->position);
+}
+
+
+int getMinDistVert(std::vector<sNode*> &Graph) {
+	float Dist = std::numeric_limits<float>::max();
+	int Index = -1;
+	for (int x = 0; x < Graph.size(); x++) {
+		if (Graph[x]->Removed)
+			continue;
+
+		if (Graph[x]->Dist < Dist) {
+			Dist = Graph[x]->Dist;
+			Index = x;
+		}
+	}
+	return Index == -1 ? 0 : Index;
+}
+
+void dijkstra(std::vector<sNode*> &Graph, int Source, int Target) {
+
+	for (int x = 0; x < Graph.size(); x++) {
+		Graph[x]->Dist = std::numeric_limits<float>::max();
+		Graph[x]->Prev = -1;
+		Graph[x]->Removed = false;
+	}
+
+	Graph[Source]->Dist = .0f;
+
+		while (!isEmpty(Graph)) {
+			int u = getMinDistVert(Graph);
+			sNode* &Vert = Graph[u];
+			Vert->Removed = true;
+
+
+			for (int y = 0; y < Vert->vec_neighbours.size(); y++) {
+				sNode* &Neighbour = Vert->vec_neighbours[y];
+				float Alt = Vert->Dist + length(Vert, Neighbour);
+				if (Alt < Neighbour->Dist) {
+					Neighbour->Dist = Alt;
+					Neighbour->Prev = u;
+				}
+			}
+		}
+
+}
+
+
+void getPath(std::vector<sNode*> &graph, std::vector<sNode*> &OutPath, int Source, int Target)
+{
+	OutPath.clear();
+	int Prev = Target;
+	while (Prev != Source)
+	{
+
+		OutPath.push_back(graph[Prev]);
+		Prev = graph[Prev]->Prev;
+		
+	}
+	OutPath.push_back(graph[Source]);
+	std::reverse(OutPath.begin(), OutPath.end());
+}
+
+
+int node = 1;
+int count = 0;
+bool picked = false;
+bool fin = false;
+void moveDalek(cGameObject* dalek)
+{
+	
+	if (fin == false) {
+		glm::vec3 nextNodePos = vec_path[node]->thisNodeObj->position;
+		if (glm::distance(dalek->position, nextNodePos) > 30.0f)
+		{
+			glm::vec3 dir(0.f);
+			dir = nextNodePos - dalek->position;
+			dir.y = 0.0f;
+			dir = glm::normalize(dir);
+			float speed = 20.0f;
+			dalek->position += dir * speed * (float)deltaTime;
+			if (picked)
+			{
+				cGameObject* res = findObjectByFriendlyName("res" + std::to_string(count));
+				res->position = glm::vec3(dalek->position.x, res->position.y, dalek->position.z);
+			}
+
+		}
+		else
+		{
+
+			if (vec_path[node]->home)
+			{
+				fin = true;
+				picked = false;
+			}
+			if (vec_path[node]->Res)
+			{
+				dijkstra(vec_graph, target, home);
+				getPath(vec_graph, vec_path, target, home);
+				picked = true;
+				//std::reverse(vec_path.begin(), vec_path.end());
+				node = 1;
+			}
+			else if (!vec_path[node]->Res)
+			{
+				node++;
+			}
+
+		}
+	}
+
+
+
+}
