@@ -2,9 +2,9 @@
     "Window": {
         "Width": 1350,
         "Height": 1000,
-        "Title" : "Animation Exam"
+        "Title" : "AI"
     },
     "Language" : "English",
-	  "Scene" : "animation_exam.json",
+	  "Scene" : "scene.json",
     "Gravity" : [0.0, -50.0, 0.0]
 }

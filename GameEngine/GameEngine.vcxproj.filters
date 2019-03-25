@@ -287,16 +287,15 @@
     <ClCompile Include="PlyFileLoader.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="BMPMapMaking.cpp">
-      <Filter>bmpLoader</Filter>
-    </ClCompile>
     <ClCompile Include="BMPImage.cpp">
       <Filter>bmpLoader</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>bmpLoader</Filter>
     </ClCompile>
-    <ClCompile Include="cMapNode.cpp" />
+    <ClCompile Include="GameLoop.cpp">
+      <Filter>bmpLoader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cShaderManager.h">
@@ -459,9 +458,6 @@
       <Filter>bmpLoader</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>bmpLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cMapNode.h">
       <Filter>bmpLoader</Filter>
     </ClInclude>
   </ItemGroup>

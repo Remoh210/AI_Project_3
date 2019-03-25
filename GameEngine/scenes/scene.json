@@ -45,7 +45,7 @@
         {
             "Name": "Character",
             "SkinnedMesh": "assets/models/FBX/chan.fbx",
-            "Visible": true,
+            "Visible": false,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
@@ -99,9 +99,9 @@
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [
-                490.0,
+                0.0,
                 -10.0,
-                480.0
+                0.0
             ],
             "DiffuseRGB_Alpha": [
                 0.0,
@@ -121,9 +121,9 @@
                 0.0
             ],
             "Scale": [
-                538.0148315429688,
-                538.0148315429688,
-                538.0148315429688
+                300.0148315429688,
+                300.0148315429688,
+                300.0148315429688
             ],
             "Textures": [
                 {
@@ -142,90 +142,11 @@
                 "Mass": 0.0
             }
         },
-        {
-            "Name": "plane_tv",
-            "Mesh": "tv_screen_new.ply",
-            "Visible": false,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                963.199951171875,
-                296.30035400390627,
-                373.50006103515627
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                0.0,
-                -89.98021697998047,
-                0.0
-            ],
-            "Scale": [
-                7.139995098114014,
-                7.139995098114014,
-                7.139995098114014
-            ],
-            "Textures": [
-                {
-                    "Name": "recticleTex.bmp",
-                    "Strength": 1.0
-                }
-            ]
-        },
-        {
-            "Name": "retroTV",
-            "Mesh": "RetroTV.ply",
-            "Visible": true,
-            "Use_Physics": true,
-            "Wireframe": false,
-            "Position": [
-                1190.0,
-                439.39825439453127,
-                492.30010986328127
-            ],
-            "DiffuseRGB_Alpha": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ],
-            "SpecularRGB_Alpha": [
-                1.0,
-                1.0,
-                1.0,
-                100.0
-            ],
-            "Rotation": [
-                180.0,
-                -88.32906341552735,
-                180.0
-            ],
-            "Scale": [
-                6.5999956130981449,
-                6.5999956130981449,
-                6.5999956130981449
-            ],
-            "Textures": [
-                {
-                    "Name": "blackWoodTex.bmp",
-                    "Strength": 1.0
-                }
-            ]
-        },
+
         {
             "Name": "block",
             "Mesh": "maze_cube.ply",
-            "Visible": true,
+            "Visible": false,
             "Use_Physics": true,
             "Wireframe": false,
             "Position": [

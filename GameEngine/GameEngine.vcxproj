@@ -155,7 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BMPImage.cpp" />
-    <ClCompile Include="BMPMapMaking.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="cAABB.cpp" />
     <ClCompile Include="cAnimationCurveCommand.cpp" />
     <ClCompile Include="cAnimationState.cpp" />
@@ -170,7 +170,6 @@
     <ClCompile Include="cLightManager.cpp" />
     <ClCompile Include="cLuaBrain.cpp" />
     <ClCompile Include="cGameObject.cpp" />
-    <ClCompile Include="cMapNode.cpp" />
     <ClCompile Include="cMazeMain.cpp" />
     <ClCompile Include="cMazeMaker.cpp" />
     <ClCompile Include="cMesh.cpp" />
@@ -234,7 +233,6 @@
     <ClInclude Include="cLightHelper.h" />
     <ClInclude Include="cLightManager.h" />
     <ClInclude Include="cLuaBrain.h" />
-    <ClInclude Include="cMapNode.h" />
     <ClInclude Include="cMazeMaker.h" />
     <ClInclude Include="cMesh.h" />
     <ClInclude Include="cMoveToCommand.h" />

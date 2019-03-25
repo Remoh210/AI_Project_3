@@ -72,8 +72,8 @@ std::vector< cGameObject* > vec_pSpheres;
 
 // To the right, up 4.0 units, along the x axis
 
-void GetBMPPixelValues(std::string bmpFileName);
-void CreateMap();
+void loadBmp(std::string bmpFileName);
+void GenerateMap();
 unsigned int numberOfObjectsToDraw = 0;
 
 unsigned int SCR_WIDTH = 1000;
@@ -81,9 +81,9 @@ unsigned int SCR_HEIGHT = 800;
 std::string title = "Default";
 std::string scene = "Scene1.json";
 
-//Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
 
-Camera camera;
+//Camera camera;
 
 bool distToCam(cGameObject* leftObj, cGameObject* rightObj) {
 	return glm::distance(leftObj->position, camera.Position) > glm::distance(rightObj->position, camera.Position); // here go your sort conditions
@@ -355,15 +355,15 @@ int main(void)
 	cGameObject* dalek = findObjectByFriendlyName("dalek");
 	cGameObject* pCharacter = findObjectByFriendlyName("Character");
 	cGameObject* block = findObjectByFriendlyName("block");
-	glm::vec3 idealpos(-60.0f, 60.0f, 0.0f);
-	glm::vec3 initPos = glm::vec3(pCharacter->position.x - 400.0f, pCharacter->position.y + 250.0f, pCharacter->position.z);
-	Camera cam(pCharacter, idealpos, 5.0f, 20.0f, 100.0f, 0.0f, initPos);
-	camera = cam;
+	//glm::vec3 idealpos(-60.0f, 60.0f, 0.0f);
+	//glm::vec3 initPos = glm::vec3(pCharacter->position.x - 400.0f, pCharacter->position.y + 250.0f, pCharacter->position.z);
+	//Camera cam(pCharacter, idealpos, 5.0f, 20.0f, 100.0f, 0.0f, initPos);
+	//camera = cam;
 
 
 
-	GetBMPPixelValues("assets/bitmap/ResourceMap.bmp");
-	CreateMap();
+	loadBmp("assets/bitmap/ResourceMap.bmp");
+	GenerateMap();
 
 
 

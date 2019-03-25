@@ -109,7 +109,7 @@ void key_callback( GLFWwindow* window,
 	if (glfwGetKey(window, GLFW_KEY_K))
 	{
 		//SwitchToSolid(vec_pObjectsToDraw);
-		g_pSceneManager->saveScene("animation_exam.json");
+		g_pSceneManager->saveScene("scene.json");
 	}
 
 
@@ -336,75 +336,6 @@ void ProcessAsynKeys(GLFWwindow* window)
 
 
 
-	cGameObject* player = findObjectByFriendlyName("Character");
-
-	player->currentAnimation = "Idle";
-	if (!bIsDebugMode) {
-		if (controlScheme == THIRD_PERSON) {
-			if (glfwGetKey(window, GLFW_KEY_W) || glfwGetKey(window, GLFW_KEY_A)
-				|| glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window, GLFW_KEY_D))
-			{
-				player->position += CharForward * 15.0f * (float)deltaTime;
-				player->currentAnimation = "Walk-forward";
-			}
-		}
-
-
-
-
-		if (controlScheme == FIRST_PERSON) {
-
-			if (glfwGetKey(window, GLFW_KEY_W))
-			{
-				player->position += CharForward * 15.0f * (float)deltaTime;
-				player->currentAnimation = "Walk-forward";
-			}
-
-			if (glfwGetKey(window, GLFW_KEY_S))
-			{
-				player->setMeshOrientationEulerAngles(0.0f, -90.0f, 0.0f, true);
-				player->position += CharForward * 15.0f * (float)deltaTime;
-
-				player->currentAnimation = "Walk-forward";
-			}
-
-		}
-
-
-
-	}
-
-
-
-	if (glfwGetKey(window, GLFW_KEY_1))
-	{
-		//controlScheme = FIRST_PERSON;
-
-		player->currentAnimation = "Action1";
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_2))
-	{
-		//controlScheme = THIRD_PERSON;
-		player->currentAnimation = "Action2";
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_3))
-	{
-		//controlScheme = FIRST_PERSON;
-
-		player->currentAnimation = "Action3";
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_4))
-	{
-		//controlScheme = THIRD_PERSON;
-		player->currentAnimation = "Action4";
-	}
-
-
-
-
 	float cameraSpeed = CAMERA_SPEED_SLOW;
 	if ( glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS  )
 	{
@@ -416,36 +347,19 @@ void ProcessAsynKeys(GLFWwindow* window)
 	{
 
 
-		if (camera.Type == FOLLOW) {
-			if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-				camera.ProcessKeyboard(FORWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-				camera.ProcessKeyboard(BACKWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-				camera.ProcessKeyboard(LEFT, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-				camera.ProcessKeyboard(RIGHT, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-				camera.ProcessKeyboard(UP, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-				camera.ProcessKeyboard(DOWN, deltaTime);
-		}
-		// Note: The "== GLFW_PRESS" isn't really needed as it's actually "1" 
-		// (so the if() treats the "1" as true...)
-		if (bIsDebugMode) {
-			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-				camera.ProcessKeyboard(FORWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-				camera.ProcessKeyboard(BACKWARD, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-				camera.ProcessKeyboard(LEFT, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-				camera.ProcessKeyboard(RIGHT, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-				camera.ProcessKeyboard(UP, deltaTime);
-			if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-				camera.ProcessKeyboard(DOWN, deltaTime);
-		}
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			camera.ProcessKeyboard(FORWARD, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			camera.ProcessKeyboard(BACKWARD, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			camera.ProcessKeyboard(LEFT, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			camera.ProcessKeyboard(RIGHT, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+			camera.ProcessKeyboard(UP, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+			camera.ProcessKeyboard(DOWN, deltaTime);
+		
 
 
 
